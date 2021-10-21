@@ -1,4 +1,5 @@
 # Bloqueia tudo
 block all
+
 # Libera pacotes de entrada (TCP/22)
 pass in proto tcp to port 22
