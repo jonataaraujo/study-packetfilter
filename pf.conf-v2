@@ -1,11 +1,18 @@
-# Macros
+# Macros Interface
 interface_externa="em0"
 interface_interna="em1"
+
+# Macros Portas
+portas_tcp = "{ 22, 80, 443 }"
+
+# Macros Protocolo
 icmp_types = "{ echoreq }"
 
 # Bloqueia tudo
 block all
-# Libera pacotes de entrada (TCP/22) na interface externa
-pass in on $interface_externa proto tcp to port { 22 }
+
+# Libera pacotes de entrada na interface externa
+pass in on $interface_externa proto tcp to port $portas_tcp
+
 #Libera pacotes ICMP
 pass inet proto icmp icmp-type $icmp_types
