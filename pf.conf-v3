@@ -1,1 +1,5 @@
-teste
+
+
+# Aceita tráfego em qualquer direção na interface de loopback 
+pass quick on lo0 all
+pass out quick on lo0 all
