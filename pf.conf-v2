@@ -14,5 +14,5 @@ block all
 # Libera pacotes de entrada na interface externa
 pass in on $interface_externa proto tcp to port $portas_tcp
 
-#Libera pacotes ICMP
+#Libera pacotes ICMP (Todas interfaces)
 pass inet proto icmp icmp-type $icmp_types
