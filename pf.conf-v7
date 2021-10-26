@@ -1,0 +1,18 @@
+# Macros Interface
+interface_externa="em0"
+interface_interna="em1"
+
+# Regras para limites
+set limit { states 10000, frags 5000 }
+set optimization normal
+set block-policy drop
+set require-order yes
+set loginterface $interface_externa
+set loginterface $interface_interna
+
+# NATs
+nat on $interface_externa from $int_net to any -> ($interface_externa)
+
+# Define o política padrao - Libera tudo
+pass in all
+pass out all
