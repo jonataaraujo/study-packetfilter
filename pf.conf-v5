@@ -2,6 +2,9 @@
 interface_externa="em0"
 interface_interna="em1"
 
+# Macros endereços interface
+ext_addr="10.100.1.149"
+
 # Macros Portas
 portas_tcp = "{ 22, 80, 443 }"
 
@@ -10,6 +13,9 @@ icmp_types = "{ echoreq }"
 
 # Tabelas
 table < sefaz > persist file "/etc/pf/tabelas/sefaz.txt"
+
+# Redireciona as conexões na porta 8080 para o servidor WEB interno
+rdr on $interface_externa inet proto tcp from any to $ext_addr port 8080 -> 192.168.4.10 port 80
 
 # Bloqueia tudo e loga
 block log all
