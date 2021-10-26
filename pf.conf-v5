@@ -1,0 +1,24 @@
+# Macros Interface
+interface_externa="em0"
+interface_interna="em1"
+
+# Macros Portas
+portas_tcp = "{ 22, 80, 443 }"
+
+# Macros Protocolo
+icmp_types = "{ echoreq }"
+
+# Tabelas
+table < sefaz > persist file "/etc/pf/tabelas/sefaz.txt"
+
+# Bloqueia tudo e loga
+block log all
+
+# Libera pacotes de entrada na interface externa e loga
+pass in log on $interface_externa proto tcp to port $portas_tcp
+
+# Libera pacotes ICMP e loga
+pass in log inet proto icmp icmp-type $icmp_types
+
+# Libera saída da LAN para comunicar com SEFAZ na porta 443
+pass out log on $interface_interna proto tcp from all to < sefaz > port 443
