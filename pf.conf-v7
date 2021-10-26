@@ -48,7 +48,6 @@ pass in log on $interface_externa proto tcp to port $portas_tcp
 # Libera pacotes ICMP e loga
 pass in log inet proto icmp icmp-type $icmp_types
 
-# Libera saída da LAN para comunicar com a internet
-pass out log on $interface_interna proto { tcp, udp, icmp } all 
-
-
+# Libera LAN para comunicar com a internet
+pass in log on $interface_interna proto { tcp, udp, icmp } all 
+pass out log on $interface_externa proto { tcp, udp, icmp } all 
