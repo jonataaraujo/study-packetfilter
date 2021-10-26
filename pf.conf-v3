@@ -9,7 +9,7 @@ portas_tcp = "{ 22, 80, 443 }"
 icmp_types = "{ echoreq }"
 
 # Bloqueia tudo e loga
-block in all
+block all
 
 # Libera pacotes de entrada na interface externa e loga
 pass in log on $interface_externa proto tcp to port $portas_tcp
