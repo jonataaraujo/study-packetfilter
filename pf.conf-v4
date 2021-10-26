@@ -8,6 +8,9 @@ portas_tcp = "{ 22, 80, 443 }"
 # Macros Protocolo
 icmp_types = "{ echoreq }"
 
+# Tabelas
+table < sefaz > persist file "/etc/pf/tabelas/sefaz.txt"
+
 # Bloqueia tudo e loga
 block in log all
 
@@ -17,5 +20,5 @@ pass in log on $interface_externa proto tcp to port $portas_tcp
 # Libera pacotes ICMP e loga
 pass in log inet proto icmp icmp-type $icmp_types
 
-# Redireciona as conexões na porta 3189 para o IP 192.168.0.2
-rdr on $ext_if inet proto tcp from < rdesktop > to $ext_addr port 3389 -> 192.168.0.2 port 3389 
+# Libera saída da LAN para comunicar com SEFAZ na porta 443
+pass out log on $interface_interna proto tcp from all to < sefaz > port 443
