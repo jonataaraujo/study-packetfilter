@@ -12,13 +12,13 @@ icmp_types = "{ echoreq }"
 table < sefaz > persist file "/etc/pf/tabelas/sefaz.txt"
 
 # Bloqueia tudo e loga
-block all
+block log all
 
 # Libera pacotes de entrada na interface externa e loga
-pass in on $interface_externa proto tcp to port $portas_tcp
+pass in log on $interface_externa proto tcp to port $portas_tcp
 
 # Libera pacotes ICMP e loga
-pass in inet proto icmp icmp-type $icmp_types
+pass in log inet proto icmp icmp-type $icmp_types
 
-# Libera saída da LAN para comunicar com SEFAZ na porta 443
-pass out on $interface_interna proto tcp from all to < sefaz > port 443
+# Libera saída da LAN para comunicar com SEFAZ na porta 443 e loga
+pass out log on $interface_interna proto tcp from all to < sefaz > port 443
