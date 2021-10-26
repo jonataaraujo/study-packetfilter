@@ -21,4 +21,4 @@ pass in on $interface_externa proto tcp to port $portas_tcp
 pass in inet proto icmp icmp-type $icmp_types
 
 # Libera saída da LAN para comunicar com SEFAZ na porta 443
-pass out on $interface_interna proto tcp from all to < sefaz > port 443
+pass out on $interface_interna proto tcp from any to < sefaz > port 443
